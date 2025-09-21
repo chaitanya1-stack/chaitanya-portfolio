@@ -325,6 +325,81 @@ body {
   text-align: center;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
+/* --- NEW STYLES FOR PORTFOLIO GALLERY SECTION --- */
+.portfolio-section {
+  padding: 2rem 4rem;
+  background: #0a0a0a;
+  border: 2px solid #CCD6F6;
+    border-radius: 40px;
+  margin: 30px; /* Match the body background */
+}
+
+.genre-container {
+  margin-bottom: 4rem;
+}
+
+.genre-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #CCD6F6;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.photo-grid {
+  /* This creates the masonry effect */
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+
+.photo-grid-item {
+  margin-bottom: 1.5rem;
+  break-inside: avoid; /* Prevents images from breaking across columns */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #CCD6F6;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.photo-grid-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.portfolio-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* --- RESPONSIVENESS FOR THE NEW GALLERY --- */
+@media (max-width: 1024px) {
+  .portfolio-section {
+    padding: 2rem;
+  }
+  .photo-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .genre-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-section {
+    padding: 2rem 1rem;
+  }
+  .photo-grid {
+    column-count: 1;
+  }
+}
 
 
 /* =================================================================== */
