@@ -1,40 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // <--- THIS LINE IS FIXED
 import '../components/landingPage.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-// NO MORE IMAGE IMPORTS HERE!
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { auto as q_auto } from "@cloudinary/url-gen/qualifiers/quality";
+import { auto as f_auto } from "@cloudinary/url-gen/qualifiers/format";
 
 const Landingpage = () => {
-  // 1. Reference images from the public folder as strings
-  const profilePic = '/images/myphoto.png'; 
-  const images = [
-    '/images/lenspic1.jpg',
-    '/images/lenspic2.jpg',
-    '/images/lenspic3.jpg',
-    '/images/lenspic4.jpg',
-    '/images/lenspic5.jpg'
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dbzjaplqp'
+    }
+  });
+
+  const profilePicId = 'myphoto_xt7p0h'; 
+  const imageIds = [
+    'lenspic1_ui6cqw',
+    'lenspic2_n6tiek',
+    'lenspic3_ay3ttr',
+    'lenspic4_wraizo',
+    'lenspic5_xyl5la'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % images.length);
+      setCurrentIndex(prev => (prev + 1) % imageIds.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [imageIds.length]);
+
+  const profileImage = cld.image(profilePicId)
+                          .resize(fill().width(120).height(120))
+                          .quality(q_auto())
+                          .format(f_auto());
 
   return (
     <div className="wholecontainer">
       <div className="leftcont">
         <div className="image_name">
-          {/* 2. Update the profile picture src */}
-          <img src={profilePic} alt="Me" className="profile-img" />
+          <AdvancedImage cldImg={profileImage} className="profile-img" alt="Me" />
           <div className="name">CHAITANYA VISION</div>
         </div>
 
-        {/* ...rest of your left container JSX... */}
         <div className="aboutme">
           <div className="chaitanya">Hello, I'm Chaitanya</div>
           <div className="description">
@@ -47,20 +59,22 @@ const Landingpage = () => {
 
       <div className="rightcont">
         <div className="image-text-wrapper">
-          {/* 3. Your image mapping now works with URL strings */}
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Lens ${index + 1}`}
-              className="lens-img"
-              style={{ opacity: currentIndex === index ? 1 : 0 }}
-              // 4. Add lazy loading for images that are not visible yet!
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          ))}
+          {imageIds.map((id, index) => {
+            const slideshowImage = cld.image(id)
+                                      .resize(fill().width(1920))
+                                      .quality(q_auto())
+                                      .format(f_auto());
+            return (
+              <AdvancedImage
+                key={id}
+                cldImg={slideshowImage}
+                className="lens-img"
+                alt={`Portfolio image ${index + 1}`}
+                style={{ opacity: currentIndex === index ? 1 : 0 }}
+              />
+            );
+          })}
            <div className="overlay-text">
-              
               <button className="btn">View Gallery</button>
            </div>
         </div>
