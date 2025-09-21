@@ -105,7 +105,7 @@ const Landingpage = () => {
         <div className="leftcont">
           <div className="image_name">
             <AdvancedImage cldImg={profileImage} className="profile-img" alt="Me" />
-            <div className="name">CHAITANYA VISION</div>
+            <div className="name">cliCK</div>
           </div>
           <div className="aboutme">
             <div className="chaitanya">Hello, I'm Chaitanya</div>

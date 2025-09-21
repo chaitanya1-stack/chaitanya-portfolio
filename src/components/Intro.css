@@ -1,0 +1,83 @@
+/* Main container for the animation */
+.intro-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: #0a0a0a;
+  color: #CCD6F6;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Container for the main name animation to keep it centered */
+.name-container {
+  /* This ensures the container doesn't jump in size */
+  height: 100px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base text styling */
+.intro-text {
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Style for "cliCK" */
+.intro-text.large {
+  font-size: 6rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+/* Style for "Chaitanya Kumar" */
+.intro-text.medium {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* Style for "Photography" */
+.intro-text.small {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: -10px; /* Adjust spacing */
+}
+
+/* Utility to hide the "cli" text smoothly */
+.cli-span {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom; /* Aligns with CK */
+}
+
+/* Utility to make sure C and K can be animated */
+.inline-block {
+  display: inline-block;
+}
+
+/* A non-breaking space for "Chaitanya Kumar" */
+.name-spacer {
+  display: inline-block;
+  width: 1.5rem; /* Space between the names */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .intro-text.large { font-size: 4rem; }
+  .intro-text.medium { font-size: 1.8rem; }
+  .intro-text.small { font-size: 1rem; }
+  .name-container { height: 80px; }
+}
+
+@media (max-width: 480px) {
+  .intro-text.large { font-size: 3rem; }
+  .intro-text.medium { font-size: 1.4rem; }
+  .intro-text.small { font-size: 0.8rem; }
+  .name-spacer { width: 0.8rem; }
+}

@@ -87,7 +87,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 5rem;
   margin-top: 20px;
   padding: 15px 25px;
   border-radius: 25px;
@@ -102,7 +102,7 @@ body {
 /* Name text */
 .name {
   font-family: 'MyFont1', sans-serif;
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: bolder;
   color: #CCD6F6;
   text-shadow: 0 2px 6px rgba(0,0,0,0.5);
