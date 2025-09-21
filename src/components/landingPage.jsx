@@ -31,6 +31,7 @@ const Landingpage = () => {
      { id: 'lenspic1_ui6cqw', genre: 'Concert', orientation: 'landscape' },
      { id: 'lenspic4_wraizo', genre: 'Concert', orientation: 'landscape' },
      { id: 'DSC05061_hmal1r', genre: 'Concert', orientation: 'portrait' },
+     { id: 'IMG20250202214023_y0vhrz', genre: 'Concert', orientation: 'portrait' },
 
    
 
@@ -38,11 +39,16 @@ const Landingpage = () => {
     // portait
     { id: 'DSC_2491_2_q7zz1v', genre: 'Portrait', orientation: 'portrait' }, 
     { id: 'DSC_2884_1_vuxqod', genre: 'Portrait', orientation: 'landscape' },
-   
+   { id: 'DSC_2402_s6uepq', genre: 'Portrait', orientation: 'portrait' }, 
+    { id: 'DSC_2890_1_khgx7z', genre: 'Portrait', orientation: 'portrait' },
 
     //nature
      
      { id: 'DSC04144_1_yq3w8k', genre: 'Nature', orientation: 'landscape' },
+       
+     { id: 'sail_team_65_e2xfb1', genre: 'Nature', orientation: 'landscape' },
+     
+     { id: '20250718-Firefly_20250718224343_1_siefdi', genre: 'Nature', orientation: 'landscape' },
 
 
     //street
@@ -50,7 +56,13 @@ const Landingpage = () => {
       { id: 'DSC_4206_olt5qh', genre: 'Street', orientation: 'landscape' },
        { id: 'DSC_2533_wwdyir', genre: 'Street', orientation: 'landscape' },
     { id: 'DSC_2539_1_3_gdmkvw', genre: 'Street', orientation: 'landscape' }, 
-    { id: 'IMG_20250209_151216_wbfrz7', genre: 'Street', orientation: 'landscape' }
+    { id: 'IMG_20250209_151216_wbfrz7', genre: 'Street', orientation: 'landscape' },
+    { id: 'IMG_20250402_030300_gvfz8z', genre: 'Street', orientation: 'portrait' },
+    { id: 'DSC_4562_1_2_dv22v5', genre: 'Street', orientation: 'landscape' },
+    { id: 'DSC_4567_1_2_aif0vu', genre: 'Street', orientation: 'landscape' },
+    { id: 'dosa_12_ivvajq', genre: 'Street', orientation: 'landscape' },
+    { id: 'sail_team_116_ixkeag', genre: 'Street', orientation: 'landscape' },
+    { id: 'sail_team_149_2_vqdfht', genre: 'Street', orientation: 'landscape' },
   ];
 
   const genres = ['Concert', 'Portrait', 'Nature', 'Street'];
@@ -110,6 +122,8 @@ const Landingpage = () => {
             })}
             <div className="overlay-text">
                 <button className="btn" onClick={handleScrollToOptions}>View Gallery</button>
+                <button className="btn" onClick={handleScrollToOptions}>Contact Me</button>
+                <button className="btn" onClick={handleScrollToOptions}>Instagram</button>
             </div>
           </div>
         </div>
