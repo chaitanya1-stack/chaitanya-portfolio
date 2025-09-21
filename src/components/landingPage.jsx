@@ -16,7 +16,7 @@ const Landingpage = () => {
   });
 
   
-  const profilePicId = 'myphoto_xt7p0h'; 
+  const profilePicId = 'favicon_ubrooc'; 
   const imageIds = [
     'lenspic1_ui6cqw', 'lenspic2_n6tiek', 'lenspic3_ay3ttr',
     'lenspic4_wraizo', 'lenspic5_xyl5la'
@@ -76,7 +76,7 @@ const Landingpage = () => {
     return () => clearInterval(interval);
   }, [imageIds.length]);
 
-  const profileImage = cld.image(profilePicId).resize(fill().width(120).height(120)).quality(q_auto()).format(f_auto());
+  const profileImage = cld.image(profilePicId).resize(fill().width(120).height(120)).quality(100).format(f_auto());
                           
   const optionsRef = useRef(null);
 
