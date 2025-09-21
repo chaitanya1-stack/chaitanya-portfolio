@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // 1. Import useRef
 import '../components/landingPage.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -38,9 +38,17 @@ const Landingpage = () => {
                           .resize(fill().width(120).height(120))
                           .quality(q_auto())
                           .format(f_auto());
+                          
+  // 2. Create a ref for the options div
+  const optionsRef = useRef(null);
+
+  // 3. Create a handler function to scroll smoothly
+  const handleScrollToOptions = () => {
+    optionsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   return (
-    // The Fragment <> allows you to return multiple elements
     <>
       <div className="wholecontainer">
         <div className="leftcont">
@@ -77,47 +85,47 @@ const Landingpage = () => {
               );
             })}
             <div className="overlay-text">
-                <button className="btn">View Gallery</button>
+                {/* 4. Add the onClick event to the button */}
+                <button className="btn" onClick={handleScrollToOptions}>View Gallery</button>
             </div>
           </div>
         </div>
       </div>
       
-      {/* ===== ADD THIS SIMPLE DIV TO TEST SCROLLING ===== */}
-    <div className="options" id="options">
-  <h2 className="options-title">Explore My Work</h2>
-  <div className="options-gallery">
-    <div className="gallery-item">
-      <div className="gallery-overlay">
-        <i className="bi bi-camera2"></i>
-        <h3 className="gallery-title">Concert Photography</h3>
+      {/* 5. Attach the ref to the target div */}
+      <div className="options" id="options" ref={optionsRef}>
+        <h2 className="options-title">Explore My Work</h2>
+        <div className="options-gallery">
+          <div className="gallery-item">
+            <div className="gallery-overlay">
+              <i className="bi bi-camera2"></i>
+              <h3 className="gallery-title">Concert Photography</h3>
+            </div>
+            <AdvancedImage cldImg={cld.image('DSC_9987-Enhanced-NR_up9rkz').resize(fill().width(600))} className="gallery-img" />
+          </div>
+          <div className="gallery-item">
+            <div className="gallery-overlay">
+              <i className="bi bi-person"></i>
+              <h3 className="gallery-title">Portrait Photography</h3>
+            </div>
+            <AdvancedImage cldImg={cld.image('DSC_2884_1_vuxqod').resize(fill().width(600))} className="gallery-img" />
+          </div>
+          <div className="gallery-item">
+            <div className="gallery-overlay">
+              <i className="bi bi-tree"></i>
+              <h3 className="gallery-title">Nature Photography</h3>
+            </div>
+            <AdvancedImage cldImg={cld.image('DSC04144_1_yq3w8k').resize(fill().width(600))} className="gallery-img" />
+          </div>
+          <div className="gallery-item">
+            <div className="gallery-overlay">
+              <i className="bi bi-lightning-charge"></i>
+              <h3 className="gallery-title">Street Photography</h3>
+            </div>
+            <AdvancedImage cldImg={cld.image('sail_team_117_2_mzm1tp').resize(fill().width(600))} className="gallery-img" />
+          </div>
+        </div>
       </div>
-      <AdvancedImage cldImg={cld.image('DSC_9987-Enhanced-NR_up9rkz').resize(fill().width(600))} className="gallery-img" />
-    </div>
-    <div className="gallery-item">
-      <div className="gallery-overlay">
-        <i className="bi bi-person"></i>
-        <h3 className="gallery-title">Portrait Photography</h3>
-      </div>
-      <AdvancedImage cldImg={cld.image('DSC_2884_1_vuxqod').resize(fill().width(600))} className="gallery-img" />
-    </div>
-    <div className="gallery-item">
-      <div className="gallery-overlay">
-        <i className="bi bi-tree"></i>
-        <h3 className="gallery-title">Nature Photography</h3>
-      </div>
-      <AdvancedImage cldImg={cld.image('DSC04144_1_yq3w8k').resize(fill().width(600))} className="gallery-img" />
-    </div>
-    {/* Add more gallery items for a scrollable effect */}
-    <div className="gallery-item">
-      <div className="gallery-overlay">
-        <i className="bi bi-lightning-charge"></i>
-        <h3 className="gallery-title">Street Photography</h3>
-      </div>
-      <AdvancedImage cldImg={cld.image('sail_team_117_2_mzm1tp').resize(fill().width(600))} className="gallery-img" />
-    </div>
-  </div>
-</div>
     </>
   );
 };

@@ -276,15 +276,21 @@ body {
   transform: scale(1.03);
 }
 
+/* --- In your .gallery-img rule --- */
 .gallery-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  /* Make the image semi-transparent by default */
+  opacity: 0.4; 
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Add opacity to the transition */
 }
 
+/* --- In your .gallery-item:hover .gallery-img rule --- */
 .gallery-item:hover .gallery-img {
   transform: scale(1.1);
+  /* Make the image fully visible on hover */
+  opacity: 1; 
 }
 
 .gallery-overlay {
