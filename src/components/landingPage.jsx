@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 import '../components/landingPage.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -15,46 +18,34 @@ const Landingpage = () => {
     }
   });
 
-  
+
   const profilePicId = 'favicon_ubrooc'; 
   const imageIds = [
     'lenspic1_ui6cqw', 'lenspic2_n6tiek', 'lenspic3_ay3ttr',
     'lenspic4_wraizo', 'lenspic5_xyl5la'
   ];
-
- 
   const portfolioImages = [
     //concert
     { id: 'DSC_9987-Enhanced-NR_up9rkz', genre: 'Concert', orientation: 'landscape' },
-     { id: 'swadesh3_33_2_1_zmrawi', genre: 'Concert', orientation: 'portrait' },
-     { id: 'lenspic3_ay3ttr', genre: 'Concert', orientation: 'landscape' },
-     { id: 'lenspic1_ui6cqw', genre: 'Concert', orientation: 'landscape' },
-     { id: 'lenspic4_wraizo', genre: 'Concert', orientation: 'landscape' },
-     { id: 'DSC05061_hmal1r', genre: 'Concert', orientation: 'portrait' },
-     { id: 'IMG20250202214023_y0vhrz', genre: 'Concert', orientation: 'portrait' },
-
-   
-
-
+    { id: 'swadesh3_33_2_1_zmrawi', genre: 'Concert', orientation: 'portrait' },
+    { id: 'lenspic3_ay3ttr', genre: 'Concert', orientation: 'landscape' },
+    { id: 'lenspic1_ui6cqw', genre: 'Concert', orientation: 'landscape' },
+    { id: 'lenspic4_wraizo', genre: 'Concert', orientation: 'landscape' },
+    { id: 'DSC05061_hmal1r', genre: 'Concert', orientation: 'portrait' },
+    { id: 'IMG20250202214023_y0vhrz', genre: 'Concert', orientation: 'portrait' },
     // portait
     { id: 'DSC_2491_2_q7zz1v', genre: 'Portrait', orientation: 'portrait' }, 
     { id: 'DSC_2884_1_vuxqod', genre: 'Portrait', orientation: 'landscape' },
-   { id: 'DSC_2402_s6uepq', genre: 'Portrait', orientation: 'portrait' }, 
+    { id: 'DSC_2402_s6uepq', genre: 'Portrait', orientation: 'portrait' }, 
     { id: 'DSC_2890_1_khgx7z', genre: 'Portrait', orientation: 'portrait' },
-
     //nature
-     
-     { id: 'DSC04144_1_yq3w8k', genre: 'Nature', orientation: 'landscape' },
-       
-     { id: 'sail_team_65_e2xfb1', genre: 'Nature', orientation: 'landscape' },
-     
-     { id: '20250718-Firefly_20250718224343_1_siefdi', genre: 'Nature', orientation: 'landscape' },
-
-
+    { id: 'DSC04144_1_yq3w8k', genre: 'Nature', orientation: 'landscape' },
+    { id: 'sail_team_65_e2xfb1', genre: 'Nature', orientation: 'landscape' },
+    { id: '20250718-Firefly_20250718224343_1_siefdi', genre: 'Nature', orientation: 'landscape' },
     //street
-     { id: 'sail_team_117_2_mzm1tp', genre: 'Street', orientation: 'landscape' },
-      { id: 'DSC_4206_olt5qh', genre: 'Street', orientation: 'landscape' },
-       { id: 'DSC_2533_wwdyir', genre: 'Street', orientation: 'landscape' },
+    { id: 'sail_team_117_2_mzm1tp', genre: 'Street', orientation: 'landscape' },
+    { id: 'DSC_4206_olt5qh', genre: 'Street', orientation: 'landscape' },
+    { id: 'DSC_2533_wwdyir', genre: 'Street', orientation: 'landscape' },
     { id: 'DSC_2539_1_3_gdmkvw', genre: 'Street', orientation: 'landscape' }, 
     { id: 'IMG_20250209_151216_wbfrz7', genre: 'Street', orientation: 'landscape' },
     { id: 'IMG_20250402_030300_gvfz8z', genre: 'Street', orientation: 'portrait' },
@@ -64,35 +55,53 @@ const Landingpage = () => {
     { id: 'sail_team_116_ixkeag', genre: 'Street', orientation: 'landscape' },
     { id: 'sail_team_149_2_vqdfht', genre: 'Street', orientation: 'landscape' },
   ];
-
   const genres = ['Concert', 'Portrait', 'Nature', 'Street'];
 
+  
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  
+  // We modify the slideshow's useEffect to be aware of the lightbox state.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % imageIds.length);
-    }, 3000);
+    let interval;
+    
+    // Only set the interval if the lightbox is NOT open
+    if (!lightboxOpen) {
+      interval = setInterval(() => {
+        setCurrentIndex(prev => (prev + 1) % imageIds.length);
+      }, 3000);
+    }
+    
+    // The cleanup function will clear the interval if the lightbox is opened or the component unmounts
     return () => clearInterval(interval);
-  }, [imageIds.length]);
 
+  }, [imageIds.length, lightboxOpen]); // We add lightboxOpen to the dependency array
+
+  
   const profileImage = cld.image(profilePicId).resize(fill().width(120).height(120)).quality(100).format(f_auto());
-                          
   const optionsRef = useRef(null);
-
   const handleScrollToOptions = () => {
     optionsRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  
   const handleScrollToGenre = (genreId) => {
     const element = document.getElementById(genreId);
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const slides = portfolioImages.map(img => ({
+      src: cld.image(img.id).quality('auto').format('auto').toURL(),
+  }));
+  const handleImageClick = (clickedImage) => {
+    const globalIndex = portfolioImages.findIndex(img => img.id === clickedImage.id);
+    setLightboxIndex(globalIndex);
+    setLightboxOpen(true);
   };
 
   return (
     <>
       <div className="wholecontainer">
-        {/* --- LEFT CONTAINER --- */}
+        
         <div className="leftcont">
           <div className="image_name">
             <AdvancedImage cldImg={profileImage} className="profile-img" alt="Me" />
@@ -108,7 +117,7 @@ const Landingpage = () => {
           </div>
         </div>
 
-        {/* --- RIGHT CONTAINER --- */}
+       
         <div className="rightcont">
           <div className="image-text-wrapper">
             {imageIds.map((id, index) => {
@@ -129,7 +138,7 @@ const Landingpage = () => {
         </div>
       </div>
       
-      {/* --- OPTIONS / CATEGORIES SECTION --- */}
+   
       <div className="options" id="options" ref={optionsRef}>
         <h2 className="options-title">Explore My Work</h2>
         <div className="options-gallery">
@@ -152,14 +161,18 @@ const Landingpage = () => {
         </div>
       </div>
 
-      {/* --- NEW PORTFOLIO GALLERY SECTION --- */}
+     
       <div className="portfolio-section">
         {genres.map(genre => (
           <div key={genre} id={genre} className="genre-container">
             <h2 className="genre-title">{genre} Photography</h2>
             <div className="photo-grid">
-              {portfolioImages.filter(img => img.genre === genre).map(image => (
-                <div key={image.id} className="photo-grid-item">
+              {portfolioImages.filter(img => img.genre === genre).map((image, index) => (
+                <div 
+                  key={image.id} 
+                  className="photo-grid-item" 
+                  onClick={() => handleImageClick(image)}
+                >
                   <AdvancedImage 
                     cldImg={cld.image(image.id).quality(q_auto()).format(f_auto())} 
                     className="portfolio-img"
@@ -170,6 +183,15 @@ const Landingpage = () => {
           </div>
         ))}
       </div>
+
+      <Lightbox
+           open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        index={lightboxIndex}
+        // ADD THIS LINE
+        className="custom-lightbox-overlay" 
+      />
     </>
   );
 };
