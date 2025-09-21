@@ -15,14 +15,14 @@ const Landingpage = () => {
     }
   });
 
-  // --- Data for your main components ---
+  
   const profilePicId = 'myphoto_xt7p0h'; 
   const imageIds = [
     'lenspic1_ui6cqw', 'lenspic2_n6tiek', 'lenspic3_ay3ttr',
     'lenspic4_wraizo', 'lenspic5_xyl5la'
   ];
 
-  // --- CORRECTED: Data for your portfolio gallery with duplicates removed ---
+ 
   const portfolioImages = [
     //concert
     { id: 'DSC_9987-Enhanced-NR_up9rkz', genre: 'Concert', orientation: 'landscape' },
@@ -36,7 +36,7 @@ const Landingpage = () => {
 
 
     // portait
-    { id: 'DSC_2491_2_q7zz1v', genre: 'Portrait', orientation: 'portrait' }, // Example portrait
+    { id: 'DSC_2491_2_q7zz1v', genre: 'Portrait', orientation: 'portrait' }, 
     { id: 'DSC_2884_1_vuxqod', genre: 'Portrait', orientation: 'landscape' },
    
 
@@ -49,7 +49,7 @@ const Landingpage = () => {
      { id: 'sail_team_117_2_mzm1tp', genre: 'Street', orientation: 'landscape' },
       { id: 'DSC_4206_olt5qh', genre: 'Street', orientation: 'landscape' },
        { id: 'DSC_2533_wwdyir', genre: 'Street', orientation: 'landscape' },
-    { id: 'DSC_2539_1_3_gdmkvw', genre: 'Street', orientation: 'landscape' }, // Example portrait
+    { id: 'DSC_2539_1_3_gdmkvw', genre: 'Street', orientation: 'landscape' }, 
     { id: 'IMG_20250209_151216_wbfrz7', genre: 'Street', orientation: 'landscape' }
   ];
 
