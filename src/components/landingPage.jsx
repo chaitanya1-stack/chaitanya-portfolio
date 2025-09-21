@@ -60,8 +60,7 @@ const Landingpage = () => {
             />
           ))}
            <div className="overlay-text">
-              <h1 className="overlay-title">My Work</h1>
-              <p className="explore">Explore my portfolio</p>
+              
               <button className="btn">View Gallery</button>
            </div>
         </div>

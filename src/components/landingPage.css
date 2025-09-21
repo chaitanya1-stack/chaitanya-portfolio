@@ -1,5 +1,10 @@
 /* ================= Base Font Imports ================= */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@font-face {
+  font-family: 'MyFont1';
+  src: url('../assets/DOVENSPersonalUse-ExtraBold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 /* ================= Base Styles (Desktop First) ================= */
